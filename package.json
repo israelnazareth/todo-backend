@@ -10,7 +10,6 @@
     "lint:fix": "eslint 'src/**/*.ts' --fix",
     "format": "prettier --write 'src/**/*.ts'"
   },
-  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
