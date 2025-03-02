@@ -63,7 +63,7 @@ docker-compose up --build
 - **GET** `/` - Listar todos os usuários
 - **GET** `/:id` - Resgatar um usuário
 - **PUT** `/:id` - Atualizar um usuário
-- **DELETE** `/:id` - Remover um usuário
+- **DELETE** `/:id` - Remover um usuário e as tarefas associadas a ele
 
 ### **Tarefas** (`/tasks`)
 

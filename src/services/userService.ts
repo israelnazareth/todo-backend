@@ -1,3 +1,4 @@
+import { Task } from '../models/Task';
 import { User } from '../models/User';
 import { UserType } from '../schemas/userSchema';
 
@@ -19,5 +20,6 @@ export const updateUser = async (id: string, userData: UserType) => {
 };
 
 export const deleteUser = async (id: string) => {
-  return await User.findByIdAndDelete(id);
+  await User.findByIdAndDelete(id);
+  return await Task.deleteMany({ userId: id });
 };
