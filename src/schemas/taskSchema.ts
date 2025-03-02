@@ -6,3 +6,5 @@ export const taskSchema = z.object({
   status: z.enum(["pendente", "em progresso", "concluído"]).default("pendente"),
   userId: z.string().regex(/^[0-9a-fA-F]{24}$/, "ID do usuário inválido"),
 });
+
+export type TaskType = z.infer<typeof taskSchema>;
