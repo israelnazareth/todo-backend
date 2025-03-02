@@ -44,12 +44,11 @@ export const updateUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const user = await User.findByIdAndUpdate(id, req.body, { new: true });
-    res.json(user);
     if (!user) {
       res.status(404).send({ message: 'Usuário não encontrado' });
       return;
     }
-    res.status(200).send({ message: 'Usuário atualizado com sucesso' });
+    res.status(200).send(user);
   } catch (error) {
     if (error instanceof Error) {
       res.status(500).send({ error: error.message });

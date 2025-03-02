@@ -48,7 +48,7 @@ export const updateTask = async (req: Request, res: Response) => {
       res.status(404).send({ message: 'Tarefa não encontrada' });
       return;
     }
-    res.status(200).send({ message: 'Tarefa atualizada com sucesso' });
+    res.status(200).send(task);
   } catch (error) {
     if (error instanceof Error) {
       res.status(500).send({ error: error.message });
