@@ -61,7 +61,7 @@ docker-compose up --build
 
 - **POST** `/` - Criar um novo usuário
 - **GET** `/` - Listar todos os usuários
-- **GET** `/:id` - Resgata um usuário
+- **GET** `/:id` - Resgatar um usuário
 - **PUT** `/:id` - Atualizar um usuário
 - **DELETE** `/:id` - Remover um usuário
 
@@ -69,7 +69,7 @@ docker-compose up --build
 
 - **POST** `/` - Criar uma nova tarefa
 - **GET** `/` - Listar todas as tarefas
-- **GET** `/:id` - Resgata uma tarefa
+- **GET** `/:id` - Resgatar uma tarefa
 - **PUT** `/:id` - Atualizar uma tarefa
 - **DELETE** `/:id` - Remover uma tarefa
 
