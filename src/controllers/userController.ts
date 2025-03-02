@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
-import { User } from '../models/User';
+import * as userService from '../services/userService';
 
 export const createUser = async (req: Request, res: Response) => {
   try {
-    const user = new User(req.body);
-    await user.save();
+    const user = await userService.createUser(req.body);
     res.status(201).send(user);
   } catch (error) {
     if (error instanceof Error) {
@@ -15,7 +14,7 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
-    const users = await User.find({});
+    const users = await userService.getAllUsers();
     res.status(200).send(users);
   } catch (error) {
     if (error instanceof Error) {
@@ -27,7 +26,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
 export const getUserById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const user = await User.findById(id);
+    const user = await userService.getUserById(id);
     if (!user) {
       res.status(404).send({ message: 'Usuário não encontrado' });
       return;
@@ -43,7 +42,7 @@ export const getUserById = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const user = await User.findByIdAndUpdate(id, req.body, { new: true });
+    const user = await userService.updateUser(id, req.body);
     if (!user) {
       res.status(404).send({ message: 'Usuário não encontrado' });
       return;
@@ -59,7 +58,7 @@ export const updateUser = async (req: Request, res: Response) => {
 export const deleteUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const user = await User.findByIdAndDelete(id);
+    const user = await userService.deleteUser(id);
     if (!user) {
       res.status(404).send({ message: 'Usuário não encontrado' });
       return;

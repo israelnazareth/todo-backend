@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
-import { Task } from '../models/Task';
+import * as taskService from '../services/taskService';
 
 export const createTask = async (req: Request, res: Response) => {
   try {
-    const task = new Task(req.body);
-    await task.save();
+    const task = await taskService.createTask(req.body);
     res.status(201).send(task);
   } catch (error) {
     if (error instanceof Error) {
@@ -15,7 +14,7 @@ export const createTask = async (req: Request, res: Response) => {
 
 export const getAllTasks = async (req: Request, res: Response) => {
   try {
-    const tasks = await Task.find({});
+    const tasks = await taskService.getAllTasks();
     res.status(200).send(tasks);
   } catch (error) {
     if (error instanceof Error) {
@@ -27,7 +26,7 @@ export const getAllTasks = async (req: Request, res: Response) => {
 export const getTaskById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const task = await Task.findById(id);
+    const task = await taskService.getTaskById(id);
     if (!task) {
       res.status(404).send({ message: 'Tarefa não encontrada' });
       return;
@@ -43,7 +42,7 @@ export const getTaskById = async (req: Request, res: Response) => {
 export const updateTask = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const task = await Task.findByIdAndUpdate(id, req.body, { new: true });
+    const task = await taskService.updateTask(id, req.body);
     if (!task) {
       res.status(404).send({ message: 'Tarefa não encontrada' });
       return;
@@ -59,7 +58,7 @@ export const updateTask = async (req: Request, res: Response) => {
 export const deleteTask = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const task = await Task.findByIdAndDelete(id);
+    const task = await taskService.deleteTask(id);
     if (!task) {
       res.status(404).send({ message: 'Tarefa não encontrada' });
       return;
